@@ -1,0 +1,304 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+section {
+    padding: 2rem 5%;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #192a56;
+    padding: .3rem 3%;
+    z-index: 1;
+}
+
+header .menu-navegacion {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    max-width: 992;
+}
+
+header .menu-navegacion .menu-links{
+    color: #858585;
+    text-decoration: none;
+}
+
+header .menu-navegacion .menu-links:hover{
+    color: #fff;
+}
+
+header .menu-navegacion .nombre{
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 0 2.3rem;
+    line-height: 5rem;
+}
+
+header .menu-navegacion .nav-menu{
+    display: flex;
+    margin-right: 2.3rem;
+    list-style: none;
+}
+
+header .menu-navegacion .nav-menu .nav-menu-item{
+    font-size: 1.1rem;
+    margin: 0 .5rem;
+    line-height: 5rem;
+    text-transform: uppercase;
+    width: max-content;
+}
+
+header .menu-navegacion .nav-menu .nav-menu-item .menu-links{
+    padding: .3rem .5rem;
+}
+
+.presentacion .row {
+    display: flex;
+    align-items: center;
+}
+
+.presentacion .row .imagen {
+    flex: 1 1 40rem;
+}
+
+.presentacion .row .imagen img {
+    width: 100%;
+}
+
+.presentacion .row .content {
+    flex: 1 1 45rem;
+}
+
+.presentacion .row .content h1 {
+    color: #192a56;
+    font-size: 3rem;
+    padding: 0.5rem;
+}
+
+.presentacion .row .content p {
+    color: #666;
+    font-size: 1.2rem;
+    padding: 1rem 0.5rem;
+    line-height: 1;
+}
+
+.presentacion .row .content .btn {
+    background-color: #309c15;
+    color: #fff;
+    padding: .5rem 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: .5rem;
+    font-size: 1.2rem;
+}
+
+.presentacion .row .content .btn:hover{
+    background: rgb(245, 226, 115);
+    color: #000;
+}
+
+.biografia {
+    background: rgb(245, 226, 115);
+    padding-top: 1rem;
+}
+
+.biografia .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.biografia .row .imagen{
+    background: #fff;
+    border-radius: 50%;
+}
+
+.biografia .row .imagen img {
+    padding: 1rem;
+    width: 20rem;
+    height: 20rem;
+}
+
+.biografia .row .content p {
+    text-align: center;
+    margin: 1rem;
+}
+
+.biografia .row .content .italic {
+    font-style: italic;
+}
+
+.proyectos h1 {
+    color: #192a56;
+    font-size: 3rem;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.proyectos .contenedor-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: .8rem;
+}
+
+.proyectos .contenedor-cards .cards {
+    background: #fff;
+    border: 0.1rem solid rgba(0, 0, 0, .2);
+    border-radius: 0.5rem;
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    text-align: center;
+}
+
+.proyectos .contenedor-cards .cards .card-img {
+    height: 19rem;
+    width: 100%;
+    padding: .5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.proyectos .contenedor-cards .cards .card-img img {
+    height: 100%;
+    width: 100%;
+    border-radius: 0.5rem;
+    object-fit: cover;
+}
+
+.proyectos .contenedor-cards .cards .content {
+    padding: .5rem 1rem;
+}
+
+.proyectos .contenedor-cards .cards .content h1 {
+    color: #192a56;
+    font-size: 1rem;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.proyectos .contenedor-cards .cards .content p {
+    color: #666;
+    font-size: .8rem;
+    text-align: center;
+    padding: .5rem 0;
+}
+
+.proyectos .contenedor-cards .cards .content .btn {
+    background-color: #309c15;
+    color: #fff;
+    padding: .5rem .5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: .5rem;
+    font-size: .8rem;
+}
+
+.proyectos .contenedor-cards .cards .content .btn:hover{
+    background: rgb(245, 226, 115);
+    color: #000;
+}
+
+footer {
+    background: #192a56;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1.5rem 3%;
+}
+
+footer p {
+    font-size: 1rem;
+    color: #858585;
+}
+
+
+@media only screen and (min-width: 500px) and (max-width: 1450px){
+    header .menu-navegacion .nombre{
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 0 .2rem;
+    }
+
+    header .menu-navegacion .nav-menu{
+        display: flex;
+        margin-right: .3rem;
+        list-style: none;
+    }
+
+    header .menu-navegacion .nav-menu .nav-menu-item{
+        font-size: 1.1rem;
+        margin: 0 .1rem;
+        text-transform: none;
+    }
+    
+    header .menu-navegacion .nav-menu .nav-menu-item .menu-links{
+        padding: .3rem .2rem;
+    }
+
+    .presentacion .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .presentacion .row .imagen img {
+        width: 100%;
+    }
+
+    .presentacion .row .imagen {
+        flex: 1 1 5rem;
+    }
+    
+    
+    .presentacion .row .content {
+        flex: 1 1 5rem;
+    }
+
+    .presentacion .row .content h1 {
+        font-size: 2rem;
+        padding: 0.3rem;
+    }
+
+    .biografia .row .imagen img {
+        padding: 1rem;
+        width: 15rem;
+        height: 15rem;
+    }
+
+    .proyectos .contenedor-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+        gap: .8rem;
+    }
+
+    .presentacion .row .content p {
+        padding: .8rem 0.1rem;
+        font-size: 1rem;
+    }
+    
+    .presentacion .row .content .btn {
+        padding: .5rem .6rem;
+        font-size: 1rem;
+    }
+    
+    .biografia .row .content p {
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    .proyectos .contenedor-cards .cards .card-img {
+        height: 15rem;
+        padding: 0.5rem;
+    }
+
+    .proyectos h1 {
+        font-size: 2rem;
+    }
+}

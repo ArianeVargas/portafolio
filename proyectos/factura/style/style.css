@@ -1,0 +1,180 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background: #ccc;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor {
+    width: 900px;
+    position: relative;
+    background-color: #fff;
+    box-shadow:  5px 5px 5px 5px rgb(117, 115, 115);
+}
+
+.linea {
+    width: 4rem;
+    height: 100%;
+    position: absolute;
+    background: linear-gradient(45deg, #7dd59b, #00b8aa);
+}
+
+.content_fac {
+    margin: 0 3rem 0 6rem;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.marca {
+    padding-top: 3rem;
+    width: 160px;
+    height: 250px;
+    background: #00b8aa;
+    margin: 0 3rem;
+    color: #fff;
+    text-align: center;
+}
+
+.marca i {
+    font-size: 8rem;
+}
+
+
+.marca p {
+    float: left;
+    text-transform: uppercase;
+    font-weight: lighter;
+    letter-spacing: 5px;
+    font-size: 1em;
+    padding: 15px;
+}
+
+.fecha {
+    padding: 6rem 0 0 0;
+}
+
+.fecha h1 {
+    font-size: 4rem;
+    color: #00b8aa;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+.fecha h3 {
+    float: left;
+    font-size: 1rem;
+    color: #00b8aa;
+    text-transform: uppercase;
+}
+
+.fecha p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.pago {
+    padding: 7rem 0 3rem 0;
+}
+
+.pago h3 {
+    color: #00b8aa;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.pago h4 {
+    float: left;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pago p {
+    font-size: 1rem;
+}
+
+.direccion {
+    padding-top: 4.4rem;
+}
+
+.direccion h1 {
+    color: #00b8aa;
+}
+
+.direccion p {
+    font-size: 1rem;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background: #00b8aa;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 1rem;
+}
+
+td {
+    padding: .7rem;
+    padding-left: 3rem;
+}
+
+.m {
+    background-color: #dddddd;
+}
+
+.s {
+    background-color: #dddddd;
+    padding: 1px;
+}
+
+.frecuente {
+    display: flex;
+}
+
+.contacto {
+    margin: 0;
+    width: 50%;
+    font-size: 1rem;
+    padding-top: 4rem;
+}
+
+.agradecimiento {
+    width: 50%;
+    padding: 2rem;
+    color: #00b8aa;
+    font-size: 2rem;
+}
+
+hr {
+    border: 3px solid #00b8aa;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+@media screen {
+    
+}

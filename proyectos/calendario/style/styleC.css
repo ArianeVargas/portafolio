@@ -1,0 +1,186 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.encabezado {
+    background-color: #cacaca;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+}
+
+.encabezado h1 {
+    padding: 2rem;
+    text-align: center;
+    font-size: 5rem;
+    color: #e66c6b;
+}
+
+.calendario {
+    font-family: 'Source Sans Pro', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(3, 25%);
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    border-radius: .5rem;
+    background: #fff;
+    box-shadow: 2px 2px 2px 1px rgba(83, 74, 74, 0.2)
+}
+
+.content-mes {
+    padding: 1rem 2rem 2rem 2rem;
+    background: #e66c6b;
+    color: #fff;
+    border-radius: .5rem .5rem 0 0;
+}
+
+.content-mes p {
+    font-size: 6rem;
+    font-weight: bold;
+}
+
+.content-mes h3 {
+    font-size: 2rem;
+    font-weight: inherit;
+}
+
+table {
+    display: grid;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: .8rem;
+    margin-top: .8rem;
+    justify-content: center;
+    text-align: center;
+}
+
+th {
+    color: #e66c6b;
+    text-align: center;
+    padding: 8px;
+    font-weight: inherit;
+    font-size: 1.3rem;
+}
+
+td {
+    text-align: center;
+    padding: 5px 11px;
+    cursor: pointer;
+    border-radius: .5rem;
+    font-size: .9rem;
+}
+
+td:hover {
+    background: #cacaca;
+}
+
+.no {
+    color: #fff;
+}
+
+.anillado{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    z-index: 1;
+}
+
+.ring-left, .ring-right{
+    top: -1.8rem;
+}
+
+
+.ring-right{
+    position: absolute;
+    margin-inline-end: 10rem;
+}
+
+.ring-left{
+    position: absolute;
+    margin-inline-start: 10rem;
+}
+
+.ring-left::before,
+.ring-right::after,
+.ring-left::after,
+.ring-right::before{
+    background: #fff;
+    border-radius: .5rem;
+    content: '';
+    display: inline-block;
+    margin: 8px;
+    height: 32px;
+    width: 8px;
+    box-shadow: 0 3px rgba(0, 0, 0,  .400);
+}
+
+
+
+
+
+@media only screen and (max-width: 1000px) {
+    .calendario {
+        display: grid;
+        grid-template-columns: repeat(2, 40%);
+    }
+
+    .content-mes {
+        padding: .8rem 0 2.5rem 1.5rem;
+    }
+
+    .content-mes p {
+        font-size: 5rem;
+    }
+
+    .content-mes h3 {
+        font-size: 2rem;
+    }
+
+
+    th {
+        font-size: 1.2rem;
+    }
+
+    td {
+        font-size: 1rem;
+    }
+
+    td:hover {
+        background: #cacaca;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .calendario {
+        display: grid;
+        grid-template-columns: repeat(1, 60%);
+    }
+
+    .content-mes {
+        padding: .8rem 0 2.5rem 1.5rem;
+    }
+
+    .content-mes p {
+        font-size: 4rem;
+    }
+
+    .content-mes h3 {
+        font-size: 1rem;
+    }
+
+    th {
+        font-size: .8rem;
+    }
+
+    td {
+        font-size: .9rem;
+    }
+
+    td:hover {
+        background: #cacaca;
+    }
+}
