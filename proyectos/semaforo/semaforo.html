@@ -1,0 +1,99 @@
+<!-- cambiar de color en 3 seg, amarillo y verde apagados  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaforo</title>
+</head>
+<body>
+    <h1>Semaforo</h1>
+    <div class="container">
+        <div class="semaforo">
+            <div class="circulo cl1" color="cl1"></div>
+            <div class="circulo" color="cl2"></div>
+            <div class="circulo" color="cl3"></div>
+        </div>
+    </div>
+
+    <script>
+        const $lucesCirculo = document.querySelectorAll('.circulo');
+        let contadorLuz = 0;
+        const mostrarLuz = () => {
+             $lucesCirculo[contadorLuz].className = 'circulo';
+             contadorLuz++
+
+             if(contadorLuz >2 )contadorLuz = 0;
+
+             const luzActual = $lucesCirculo[contadorLuz];
+             luzActual.classList.add(luzActual.getAttribute('color'))
+        }
+    setInterval(mostrarLuz, 3000)
+
+    </script>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(#4cc1908f, #4188b1);
+        }
+
+        h1{
+            font-size: 3rem;
+            position: absolute;
+            top: 0;
+            text-align: center;
+            padding-top: 100px;
+            color: #fff;
+        }
+
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            height: 400px;
+            width: 150px;
+            padding: 20px 0;
+            border-radius: 80px;
+            background-color: #2c3e50;
+        }
+
+        .circulo{
+            position: relative;
+            margin: 20px;
+            height: 80px;
+            width: 80px;
+            border-radius: 100%;
+            background-color: #1d1d1d;
+        }
+
+        .circulo.cl1{
+            background-color: #ff3822;
+            box-shadow: 0 0 60px 10px #ff3822;
+        }
+
+        .circulo.cl2{
+            background-color: #eeff03;
+            box-shadow: 0 0 60px 10px #eeff03;
+        }
+
+        .circulo.cl3{
+            background-color: #06ff59;
+            box-shadow: 0 0 60px 10px #06ff59;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <form name="calculadora">
+        <div class="tabla">
+            <input type="textfield" name="ans" value="" readonly>
+            <div class="cuadro">
+                <div id="num"></div>
+                <div id="operaciones"></div>
+            </div>
+        </div>
+    </form>
+    <script>
+        const operaciones = ["+", "-", "*", "/"]
+        let operationPerformed = false;
+
+        for (let i = 1; i <= 12; i++) {
+            if (i < 10) document.getElementById("num").innerHTML += `<input type="button" value="${i}" onClick="appendCharacter('${i}')">`
+            else {
+                if (i == 10) document.getElementById("num").innerHTML += `<input type="button" value="0" onClick="appendCharacter('0')">`
+                else if (i == 11) document.getElementById("num").innerHTML += `<input type="button" value="." onClick="appendCharacter('.')">`
+                else if (i == 12) document.getElementById("num").innerHTML += `<input type="reset" value="c">`
+            }
+        }
+
+        for (let i = 0; i < 7; i++) {
+            if (i < 4) document.getElementById("operaciones").innerHTML += `<input type="button" value="${operaciones[i]}" onClick="appendCharacter('${operaciones[i]}')">`
+            else if (i == 4) document.getElementById("operaciones").innerHTML += `<input type="button" value="√" onClick="calculateSquareRoot()">`
+            else if (i == 5) document.getElementById("operaciones").innerHTML += `<input type="button" value="^" onClick="calculatePower()">`
+            else if (i == 6) document.getElementById("operaciones").innerHTML += `<input id="equal-button" type="button" value="=" onClick="evaluateExpression()">`
+        }
+
+        function appendCharacter(character) {
+            var ans = document.calculadora.ans;
+            if (operationPerformed) {
+                ans.value = '';
+                operationPerformed = false;
+            }
+            ans.value += character;
+        }
+
+        function deleteCharacter() {
+            var ans = document.calculadora.ans;
+            ans.value = ans.value.slice(0, -1);
+        }
+
+        function evaluateExpression() {
+            var ans = document.calculadora.ans;
+            try {
+                ans.value = eval(ans.value);
+                operationPerformed = true;
+            } catch (error) {
+                ans.value = 'Error';
+            }
+        }
+
+        function calculateSquareRoot() {
+            var ans = document.calculadora.ans;
+            var value = ans.value;
+            ans.value = Math.sqrt(eval(value));
+            operationPerformed = true;
+        }
+        
+        function calculatePower() {
+            var ans = document.calculadora.ans;
+            var value = ans.value;
+            ans.value += '**';
+            operationPerformed = true;
+        }
+    </script>
+    <style>
+        form {
+            width: 350px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            border: 1px solid #ffd335;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #d0d5d6;
+        }
+
+        .tabla {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .cuadro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #num {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        #operaciones {
+            color: #ffd335;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        input[type="textfield"] {
+            padding: 5px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .cuadro input[type="button"] {
+            width: 60px;
+            height: 60px;
+            font-size: 16px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .cuadro input[type="reset"] {
+            width: 60px;
+            height: 60px;
+            font-size: 16px;
+            background-color: #ffd335;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        #equal-button {
+            width: 128px;
+            height: 60px;
+            background-color: #ffd335;
+            grid-column: span 2;
+        }
+    </style>
+</body>
+</html>

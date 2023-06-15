@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria</title>
+</head>
+
+<body>
+    <img src="img/img-1.jpg" id="imagen" class="imagen-principal" alt="">
+    <div class="grid" id="gridContainer"></div>
+
+    <script>
+        const imagenes = [
+            { image: "img/img-1.jpg" },
+            { image: "img/img-2.jpg" },
+            { image: "img/img-3.jpg" },
+            { image: "img/img-4.jpg" },
+            { image: "img/img-5.jpg" },
+            { image: "img/img-6.jpg" },
+            { image: "img/img-7.jpg" },
+            { image: "img/img-8.jpg" },
+            { image: "img/img-9.jpg" },
+            { image: "img/img-10.jpg" },
+            { image: "img/img-11.jpg" },
+            { image: "img/img-12.jpg" }
+        ];
+
+
+        let imagenPrincipal = document.querySelectorAll(".imagen-principal")[0];
+        //se inicia la imagen principal 
+        const gridContainer = document.getElementById('gridContainer');
+
+        for (let i = 0; i < imagenes.length; i++) {
+            const product = imagenes[i];
+            // Obtenemos el producto actual en la iteración
+            const productDiv = document.createElement('div');
+            // Creamos un nuevo elemento 'div' para representar la celda del producto
+            productDiv.classList.add('product');
+            // Agregamos la clase CSS 'product' al elemento 'div' recién creado
+            const image = document.createElement('img');
+            // Creamos un nuevo elemento 'img' para mostrar la imagen del producto
+            image.src = product.image;
+            // Establecemos la URL de la imagen del producto en el atributo 'src' del elemento 'img'
+            image.addEventListener('click', function () {
+                imagenPrincipal.src = product.image;
+            });
+
+            productDiv.appendChild(image);
+            // Agregamos el elemento 'img' como hijo del elemento 'div'
+            gridContainer.appendChild(productDiv);
+            // Agregamos el elemento 'div' como hijo del contenedor de la grilla
+        }
+
+
+    </script>
+    <style>
+        .grid {
+            margin-top: 10px;
+            width: 100%;
+            height: 100px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 15px;
+        }
+
+        .product {
+            width: 100%;
+            border: 1px solid black;
+            padding: 3px;
+        }
+
+        #imagen {
+            display: flex;
+            margin: auto;
+            padding: 3px;
+            width: 50%;
+            height: 500px;
+            border: 1px solid black;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media only screen and (max-width: 770px) {
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: 15px;
+            }
+
+            #imagen {
+                width: 50%;
+                height: 300px;
+            }
+        }
+
+        @media only screen and (max-width: 550px) {
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 15px;
+            }
+
+            #imagen {
+                width: 50%;
+                height: 200px;
+            }
+        }
+
+        @media only screen and (max-width: 330px) {
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                grid-gap: 15px;
+            }
+
+            #imagen {
+                width: 50%;
+                height: 130px;
+            }
+        }
+    </style>
+</body>
+
+</html>
