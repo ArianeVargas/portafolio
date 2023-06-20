@@ -10,6 +10,14 @@ section {
     padding: 2rem 5%;
 }
 
+.inicio{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 2rem;
+    padding: .5rem;
+}
+
 header {
     position: fixed;
     top: 0;

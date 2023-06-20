@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Calculadora</title>
 </head>
 
 <body>
+    <div class="inicio"><a href="/index.html"><i class='bx bx-home-alt'></i></a></div>
+
     <form name="calculadora">
         <div class="tabla">
             <input type="textfield" name="ans" value="" readonly>
@@ -68,7 +71,7 @@
             ans.value = Math.sqrt(eval(value));
             operationPerformed = true;
         }
-        
+
         function calculatePower() {
             var ans = document.calculadora.ans;
             var value = ans.value;
@@ -146,6 +149,17 @@
             background-color: #ffd335;
             grid-column: span 2;
         }
+
+        .inicio {
+            text-decoration: none;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            color: #ffd335;
+            font-size: 2rem;
+            padding: .5rem;
+        }
     </style>
 </body>
+
 </html>

@@ -3,6 +3,14 @@
     margin: 0;
 }
 
+.inicio{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 2rem;
+    padding: .5rem;
+}
+
 .encabezado {
     background-color: #cacaca;
     margin-bottom: 2rem;

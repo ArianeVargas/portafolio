@@ -15,6 +15,14 @@ main {
     align-items: center;
 }
 
+.inicio{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 2rem;
+    padding: .5rem;
+}
+
 .contenedor {
     width: 900px;
     position: relative;

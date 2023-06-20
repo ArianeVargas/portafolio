@@ -57,3 +57,11 @@ p {
     font-size: 14px;
     color: #666;
 }
+
+.inicio{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 2rem;
+    padding: .5rem;
+}

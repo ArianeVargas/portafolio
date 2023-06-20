@@ -36,6 +36,14 @@ img{
     padding: 3rem;
 }
 
+.inicio{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 2rem;
+    padding: .5rem;
+}
+
 .contenedor{
     max-width: 1250px;
     margin-left: auto;
