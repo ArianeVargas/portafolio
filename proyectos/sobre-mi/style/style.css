@@ -10,13 +10,18 @@ section {
     padding: 2rem 5%;
 }
 
-.inicio{
+.inicio {
     position: fixed;
     bottom: 0;
-    right: 0;
-    font-size: 2rem;
+    right: 30px;
+    font-size: 3rem;
     padding: .5rem;
 }
+
+.inicio i{
+    color: #000;
+}
+
 
 header {
     position: fixed;

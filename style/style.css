@@ -258,6 +258,22 @@ li{
     padding: 1rem;
 }
 
+.desc{
+    text-align: justify;
+    padding: 2rem;
+}
+
+.herramienas{
+    font-size: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 5rem;
+}
+
+.herramienas i{
+    padding: 2rem;
+    text-align: left;
+}
 
 @keyframes circulo1{
     from{
