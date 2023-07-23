@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style/style.css">
+    <title>Agenda-cita || Veterinaria</title>
+</head>
+
+<body>
+    <main>
+        <div class="inicio">
+            <img src="img/a21od-ejiib.jpg" alt="">
+        </div>
+
+        <div class="contenedor">
+            <div class="head">
+                <h1 class="h1">Bienvenido veterinaria patitas</h1>
+            </div>
+
+            <div class="center-container">
+                <button class="cita" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                        class='bx bxs-folder-plus'></i>Agendar Cita</button>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Registro</h1>
+                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <p id="alerta"></p>
+                        <div class="modal-body">
+                            <label for="">Nombre mascota</label><input type="text" id="nombreMascota">
+                            <label for="">Nombre propietario</label><input type="text" id="nombrePropietario">
+                            <label for="">telefono</label><input type="text" id="telefono">
+                            <label for="">Tipo de mascota</label>
+                            <select id="tipoMascota">
+                                <option value=""></option>
+                                <option data-imagen="img/descarga (3).jpg">Mamifero</option>
+                                <option data-imagen="img/😍pollito ultra tierno.jpg">Ave</option>
+                                <option data-imagen="img/descarga.jpg">Reptil</option>
+                                <option data-imagen="img/descarga (4).jpg">Anfibio</option>
+                                <option data-imagen="img/descarga (1).jpg">Pez</option>
+                            </select>
+                            <label for="">Fecha</label><input type="date" id="fecha">
+                            <label for="">Hora</label><input type="time" id="hora">
+                            <label for="">Sintomas</label><textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                                    class='bx bx-x-circle'></i>Cerrar</button>
+                            <button onclick="guardar()" type="button" class="btn btn-cambios"><i
+                                    class='bx bx-checkbox-checked'></i>Guardar cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="estados">
+                <button onclick="mostrarCitasByEstado('creada')">Mostrar citas creadas</button>
+                <button onclick="mostrarCitasByEstado('finalizada')">Mostrar citas finalizadas</button>
+                <button onclick="mostrarCitasByEstado('cancelada')">Mostrar citas canceladas</button>
+            </div>
+
+            <div id="tarjetasContainer"></div>
+
+        </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
