@@ -11,72 +11,115 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/style.css">
     <title>Agenda-cita || Veterinaria</title>
 </head>
 
 <body>
     <div class="inicioi"><a href="/index.html"><i class='bx bx-home-alt'></i></a></div>
     <main>
+        <div class="head">
+            <h1 class="h1">Bienvenido veterinaria patitas</h1>
+        </div>
         <div class="inicio">
             <img src="img/a21od-ejiib.jpg" alt="">
         </div>
 
         <div class="contenedor">
-            <div class="head">
-                <h1 class="h1">Bienvenido veterinaria patitas</h1>
-            </div>
 
             <div class="center-container">
-                <button class="cita" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                <button class="cita" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="crear()"><i
                         class='bx bxs-folder-plus'></i>Agendar Cita</button>
             </div>
 
+
+            <div class="col1">
+                <div class="p-3">
+                    <h4>Administra tus citas</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Terminadas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                            value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Abiertas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                            value="option3">
+                        <label class="form-check-label" for="inlineRadio3">Cancelada</label>
+                    </div>
+
+                    <div id="tarjeta" class="tarjeta"></div>
+                </div>
+            </div>
+
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true" data-bs-backdrop="static">
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Registro</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo registro</h1>
                             <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <p id="alerta"></p>
+                        <div id="msj"></div>
+                        <div id="msj2"></div>
                         <div class="modal-body">
-                            <label for="">Nombre mascota</label><input type="text" id="nombreMascota">
-                            <label for="">Nombre propietario</label><input type="text" id="nombrePropietario">
-                            <label for="">telefono</label><input type="text" id="telefono">
-                            <label for="">Tipo de mascota</label>
-                            <select id="tipoMascota">
-                                <option value=""></option>
-                                <option data-imagen="img/descarga (3).jpg">Mamifero</option>
-                                <option data-imagen="img/😍pollito ultra tierno.jpg">Ave</option>
-                                <option data-imagen="img/descarga.jpg">Reptil</option>
-                                <option data-imagen="img/descarga (4).jpg">Anfibio</option>
-                                <option data-imagen="img/descarga (1).jpg">Pez</option>
-                            </select>
-                            <label for="">Fecha</label><input type="date" id="fecha">
-                            <label for="">Hora</label><input type="time" id="hora">
-                            <label for="">Sintomas</label><textarea class="form-control" id="message-text"></textarea>
+                            <div>
+                                <label for="">Nombre mascota:</label>
+                                <input class="datos" type="text" id="mascota">
+                                <div class="mensaje-error" id="msj_mascota"></div>
+                            </div>
+                            <div>
+                                <label for="">Propietario:</label>
+                                <input class="datos" type="text" id="propietario">
+                                <div class="mensaje-error" id="msj_propietario"></div>
+                            </div>
+                            <div>
+                                <label for="">Telefono:</label>
+                                <input class="datos" type="number" id="telefono">
+                                <div class="mensaje-error" id="msj_telefono"></div>
+                            </div>
+                            <div>
+                                <label for="">Tipo de mascota:</label>
+                                <select id="tipo" class="datos">
+                                    <option value=""></option>
+                                    <option data-imagen="img/descarga (3).jpg">Mamifero</option>
+                                    <option data-imagen="img/😍pollito ultra tierno.jpg">Ave</option>
+                                    <option data-imagen="img/descarga.jpg">Reptil</option>
+                                    <option data-imagen="img/descarga (4).jpg">Anfibio</option>
+                                    <option data-imagen="img/descarga (1).jpg">Pez</option>
+                                </select>
+                                <div class="mensaje-error" id="msj_tipo"></div>
+                            </div>
+                            <div>
+                                <label for="">Fecha:</label>
+                                <input class="datos" type="date" id="fecha">
+                                <div class="mensaje-error" id="msj_fecha"></div>
+                            </div>
+                            <div>
+                                <label for="">Hora:</label>
+                                <input class="datos" type="time" id="hora">
+                                <div class="mensaje-error" id="msj_hora"></div>
+                            </div>
+                            <div>
+                                <label for="">Síntomas:</label>
+                                <textarea class="datos" id="message-text"></textarea>
+                                <div class="mensaje-error" id="msj_sintomas"></div>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
-                                    class='bx bx-x-circle'></i>Cerrar</button>
-                            <button onclick="guardar()" type="button" class="btn btn-cambios"><i
-                                    class='bx bx-checkbox-checked'></i>Guardar cambios</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id="cerrar">Cerrar</button>
+                            <button onclick="guardar()" type="button" class="btn cita-n"
+                                id="aceptar">Aceptar</button>
                         </div>
                     </div>
                 </div>
+                
             </div>
-            <div class="estados">
-                <button onclick="mostrarCitasByEstado('creada')">Mostrar citas creadas</button>
-                <button onclick="mostrarCitasByEstado('finalizada')">Mostrar citas finalizadas</button>
-                <button onclick="mostrarCitasByEstado('cancelada')">Mostrar citas canceladas</button>
-            </div>
-
-            <div id="tarjetasContainer"></div>
-
-        </div>
-        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

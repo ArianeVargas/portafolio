@@ -1,271 +1,353 @@
-let tarjetaId = 1;
-let tarjetas = [];
-const ESTADOS = ["", "creada", "finalizada", "cancelada"];
-const ESTADO_COLORS = ["", "#AED6F1", "#82E0AA", "#F5B7B1"];
+function validar() {
+    const mascota = document.getElementById("mascota").value.trim();
+    const propietario = document.getElementById("propietario").value.trim();
+    const telefono = document.getElementById("telefono").value.trim();
+    const tipoMascota = document.getElementById("tipo").value;
+    const fecha = document.getElementById("fecha").value;
+    const hora = document.getElementById("hora").value;
+    const sintomas = document.getElementById("message-text").value.trim();
 
-function generarTarjeta(nombreMascota, nombrePropietario, telefono, tipoMascota, fecha, hora, sintomas, estadoIndex) {
-    let cardDiv = document.createElement('div');
-    cardDiv.classList.add('card');
-    cardDiv.style.width = '20rem';
-    cardDiv.setAttribute('id', 'tarjeta-' + tarjetaId);
-
-    let cardImg = document.createElement('img');
-    cardImg.classList.add('card-img-top');
-    let imagenSeleccionada = document.querySelector('#tipoMascota option:checked').getAttribute('data-imagen');
-    cardImg.src = imagenSeleccionada;
-    cardImg.alt = 'Imagen de ' + tipoMascota;
-
-    let cardBodyDiv = document.createElement('div');
-    cardBodyDiv.classList.add('card-bod');
-
-    let cardTitle = document.createElement('h5');
-    cardTitle.classList.add('card-title');
-    cardTitle.textContent = nombreMascota;
-
-    let cardText = document.createElement('p');
-    cardText.classList.add('card-text');
-    let horaFormato12 = convertirHoraFormato12(hora);
-    cardText.innerHTML = 'Propietario: <strong>' + nombrePropietario + '</strong><br>Teléfono: <strong>' + telefono + '</strong><br>Tipo de mascota: <strong>' + tipoMascota + '</strong><br>Fecha: <strong>' + fecha + '</strong><br>Hora: <strong>' + horaFormato12 + '</strong><br>Síntomas: <strong>' + sintomas + '</strong>';
-
-    let cardFooterDiv = document.createElement('div');
-    cardFooterDiv.classList.add('card-footer');
-
-    let estadoSelect = document.createElement('select');
-    estadoSelect.classList.add('form-select');
-
-    ESTADOS.forEach((estado, index) => {
-        let estadoOption = document.createElement('option');
-        estadoOption.value = index;
-        estadoOption.textContent = estado.charAt(0).toUpperCase() + estado.slice(1);
-        estadoOption.style.backgroundColor = ESTADO_COLORS[index];
-
-        estadoSelect.appendChild(estadoOption);
+    // Reiniciamos los mensajes de error
+    document.querySelectorAll(".mensaje-error").forEach((elemento) => {
+        elemento.textContent = "";
     });
 
-    estadoSelect.value = estadoIndex;
+    let error = false;
+    const regex = /^[a-zA-Z\s]*$/;
 
-    estadoSelect.addEventListener('change', function () {
-        let selectedEstado = ESTADOS[estadoSelect.value];
-        tarjetas[tarjetaId - 1].estado = selectedEstado;
-        console.log(tarjetas);
-
-        estadoSelect.style.backgroundColor = ESTADO_COLORS[estadoSelect.value];
-    });
-
-    let editarBtn = document.createElement('button');
-    editarBtn.classList.add('btn', 'btn-cambios', 'mr-2');
-    editarBtn.textContent = 'Editar';
-    editarBtn.addEventListener('click', function () {
-        cargarDatosEdicion(tarjetaId);
-    });
-
-    cardDiv.classList.add(`estado-${ESTADOS[estadoIndex]}`);
-    cardFooterDiv.appendChild(estadoSelect);
-    cardFooterDiv.appendChild(editarBtn);
-
-    tarjetaId++;
-    cardDiv.appendChild(cardImg);
-    cardBodyDiv.appendChild(cardTitle);
-    cardBodyDiv.appendChild(cardText);
-    cardDiv.appendChild(cardBodyDiv);
-    cardDiv.appendChild(cardFooterDiv);
-    document.getElementById('tarjetasContainer').appendChild(cardDiv);
-}
-
-let editingTarjetaId = null;
-function cargarDatosEdicion(tarjetaId) {
-    let tarjetaIndex = tarjetaId - 1;
-    let tarjeta = tarjetas[tarjetaIndex];
-    document.getElementById('nombreMascota').value = tarjeta.nombreMascota;
-    document.getElementById('nombrePropietario').value = tarjeta.nombrePropietario;
-    document.getElementById('telefono').value = tarjeta.telefono;
-    document.getElementById('tipoMascota').value = tarjeta.tipoMascota;
-    document.getElementById('fecha').value = tarjeta.fecha;
-    document.getElementById('hora').value = tarjeta.hora;
-    document.getElementById('message-text').value = tarjeta.sintomas;
-
-    editingTarjetaId = tarjetaId;
-
-    let modal = document.getElementById('exampleModal');
-    let modalInstance = bootstrap.Modal.getInstance(modal);
-    modalInstance.show();
-}
-
-function convertirHoraFormato12(hora24) {
-    let hora12 = "";
-    let partesHora = hora24.split(":");
-    let hora = parseInt(partesHora[0]);
-    let minutos = partesHora[1];
-
-    if (hora === 0) {
-        hora12 = "12:" + minutos + " AM";
-    } else if (hora < 12) {
-        hora12 = hora + ":" + minutos + " AM";
-    } else if (hora === 12) {
-        hora12 = "12:" + minutos + " PM";
-    } else {
-        hora12 = (hora > 12 ? hora - 12 : hora) + ":" + minutos + " PM";
+    if (mascota === "") {
+        mostrarError("mascota", "Por favor, digite el nombre de la mascota");
+        error = true;
+    } else if (!regex.test(mascota)) {
+        mostrarError("mascota", "El nombre de la mascota no debe contener números");
+        error = true;
     }
 
-    return hora12;
+    if (propietario === "") {
+        mostrarError("propietario", "Por favor, digite su nombre");
+        error = true;
+    } else if (!regex.test(propietario)) {
+        mostrarError("propietario", "El nombre del propietario no debe contener números");
+        error = true;
+    }
+
+    if (telefono === "") {
+        mostrarError("telefono", "Por favor, digite un teléfono");
+        error = true;
+    } else if (telefono.length !== 10) {
+        mostrarError("telefono", "Por favor, digite un número de teléfono con 10 dígitos");
+        error = true;
+    }
+
+    if (tipoMascota === "Seleccione") {
+        mostrarError("tipo", "Por favor, seleccione el tipo de mascota");
+        error = true;
+    }
+
+    if (fecha === "") {
+        mostrarError("fecha", "Por favor, seleccione una fecha para reservar");
+        error = true;
+    } else {
+        let seleccionFecha = new Date(fecha);
+        let fechaActual = new Date();
+        fechaActual.setHours(0, 0, 0, 0);
+        let seleccionHora = parseInt(hora.split(":")[0]);
+
+        if (seleccionFecha < fechaActual || (seleccionFecha.getTime() === fechaActual.getTime() && seleccionHora < 8)) {
+            mostrarError("fecha", "Debe seleccionar una fecha válida");
+            error = true;
+        }
+    }
+
+    if (hora === "") {
+        mostrarError("hora", "Por favor, elija una hora disponible");
+        error = true;
+    } else {
+        let seleccionHora = parseInt(hora.split(":")[0]);
+        if (seleccionHora < 8 || seleccionHora > 20) {
+            mostrarError("hora", "La hora debe estar entre las 8 AM y las 8 PM.");
+            error = true;
+        }
+    }
+
+    if (sintomas === "") {
+        mostrarError("message-text", "Por favor, digite los síntomas");
+        error = true;
+    }
+
+    if (error) {
+        return false;
+    }
+
+    document.getElementById("msj2").style.display = "block";
+    document.getElementById("msj2").textContent = "Registro Exitoso";
+    document.getElementById("msj2").classList.add("mensaje-exito");
+
+    setTimeout(() => {
+        document.getElementById("msj2").style.display = "none";
+        document.getElementById("msj2").classList.remove("mensaje-exito");
+    }, 3000);
+
+    return true;
+}
+
+function mostrarError(campo, mensaje) {
+    const campoInput = document.getElementById(campo);
+    const mensajeError = document.createElement("div");
+    mensajeError.textContent = mensaje;
+    mensajeError.classList.add("mensaje-error");
+    campoInput.parentNode.appendChild(mensajeError);
+
+    setTimeout(() => {
+        mensajeError.remove();
+    }, 5000);
+}
+
+let bd = ""
+let id = 0
+let id2
+
+let data = []
+
+function crear() {
+    bd = "agregar"
+    limpiar()
+}
+
+function actualizarImagenTipoMascota() {
+    const tipoInput = document.getElementById('tipo');
+    const selectedOption = tipoInput.options[tipoInput.selectedIndex];
+    const imagen = selectedOption.getAttribute('data-imagen');
+    const imagenPreview = document.getElementById('imagen-preview');
+    imagenPreview.src = imagen;
 }
 
 function guardar() {
     if (!validar()) {
         return;
     }
-
-    if (editingTarjetaId !== null) {
-        let tarjetaIndex = editingTarjetaId - 1;
-        tarjetas[tarjetaIndex].nombreMascota = document.getElementById('nombreMascota').value;
-        tarjetas[tarjetaIndex].nombrePropietario = document.getElementById('nombrePropietario').value;
-        tarjetas[tarjetaIndex].telefono = document.getElementById('telefono').value;
-        tarjetas[tarjetaIndex].tipoMascota = document.getElementById('tipoMascota').value;
-        tarjetas[tarjetaIndex].fecha = document.getElementById('fecha').value;
-        tarjetas[tarjetaIndex].hora = document.getElementById('hora').value;
-        tarjetas[tarjetaIndex].sintomas = document.getElementById('message-text').value;
-
-        let editedCard = document.getElementById('tarjeta-' + editingTarjetaId);
-        editedCard.querySelector('.card-title').textContent = document.getElementById('nombreMascota').value;
-        let horaFormato12 = convertirHoraFormato12(document.getElementById('hora').value);
-        editedCard.querySelector('.card-text').innerHTML = 'Propietario: <strong>' + document.getElementById('nombrePropietario').value + '</strong><br>Teléfono: <strong>' + document.getElementById('telefono').value + '</strong><br>Tipo de mascota: <strong>' + document.getElementById('tipoMascota').value + '</strong><br>Fecha: <strong>' + document.getElementById('fecha').value + '</strong><br>Hora: <strong>' + horaFormato12 + '</strong><br>Síntomas: <strong>' + document.getElementById('message-text').value + '</strong>';
-        editedCard.classList.remove(...editedCard.classList);
-
-        editingTarjetaId = null;
-    } else {
-        let nombreMascota = document.getElementById('nombreMascota').value;
-        let nombrePropietario = document.getElementById('nombrePropietario').value;
+    if (bd == "agregar") {
+        let mascota = document.getElementById('mascota').value;
+        let propietario = document.getElementById('propietario').value;
         let telefono = document.getElementById('telefono').value;
-        let tipoMascota = document.getElementById('tipoMascota').value;
+        let tipo = document.getElementById('tipo').value;
+        let imagen = document.querySelector('#tipo option:checked').getAttribute('data-imagen');
         let fecha = document.getElementById('fecha').value;
         let hora = document.getElementById('hora').value;
         let sintomas = document.getElementById('message-text').value;
+        let estadoCita = document.querySelector('#tipo option:checked').getAttribute('data-imagen');
 
-        generarTarjeta(nombreMascota, nombrePropietario, telefono, tipoMascota, fecha, hora, sintomas);
-    }
-
-    limpiarModal();
-}
-
-function validar() {
-    if (document.getElementById("nombreMascota").value.trim() === "") {
-        document.getElementById("alerta").textContent = "Por favor, digite un nombre de mascota";
-        document.getElementById("alerta").style.display = "block";
-        limpiarError();
-        return false;
-    } else if (document.getElementById("nombrePropietario").value.trim() === "") {
-        document.getElementById("alerta").textContent = "Por favor, digite un nombre de propietario";
-        document.getElementById("alerta").style.display = "block";
-        limpiarError();
-        return false;
-    } else if (document.getElementById("telefono").value.trim() === "") {
-        document.getElementById("alerta").textContent = "Por favor digite un teléfono";
-        document.getElementById("alerta").style.display = "block";
-        limpiarError();
-        return false;
-    } else if (document.getElementById("telefono").value.length < 10) {
-        document.getElementById("alerta").textContent = "Por favor, el número debe tener al menos 10 caracteres";
-        document.getElementById("alerta").style.display = "block";
-        limpiarError();
-        return false;
-    } else if (!(/^\d+$/.test(document.getElementById("telefono").value.trim()))) {
-        document.getElementById("alerta").textContent = "El teléfono debe contener solo números";
-        document.getElementById("alerta").style.display = "block";
-        return false;
-    } else if (document.getElementById("fecha").value === "") {
-        document.getElementById("alerta").textContent = "Por favor, seleccione una fecha";
-        document.getElementById("alerta").style.display = "block";
-        limpiarError();
-        return false;
-    } else if (document.getElementById("hora").value === "") {
-        document.getElementById("alerta").textContent = "Por favor, seleccione una hora";
-        document.getElementById("alerta").style.display = "block";
-        limpiarError();
-        return false;
-    } else if (document.getElementById("hora").value < 8 || document.getElementById("hora").value > 18) {
-        document.getElementById("alerta").textContent = "La hora debe estar entre las 8 AM y las 6 PM.";
-        document.getElementById("alerta").style.display = "block";
-        limpiarError();
-        return false;
-    } else if (document.getElementById("message-text").value.trim() === "") {
-        document.getElementById("alerta").textContent = "Por favor, ingrese los síntomas";
-        document.getElementById("alerta").style.display = "block";
-        limpiarError();
-        return false;
+        id += 1
+        data.push({ id, mascota, propietario, telefono, tipo, imagen, fecha, hora, sintomas, estadoCita });
+        document.getElementById('tarjeta').innerHTML = ""
+        pintar()
+        limpiar()
     } else {
-        let seleccionFecha = new Date(document.getElementById("fecha").value);
-        let seleccionHora = parseInt(document.getElementById("hora").value);
-
-        let fechaActual = new Date();
-
-        if (seleccionHora < 8 || seleccionHora > 18) {
-            document.getElementById("alerta").textContent = "La hora debe estar entre las 8 AM y las 6 PM.";
-            document.getElementById("alerta").style.display = "block";
-            limpiarError();
-            return false;
-        }
-
-        fechaActual.setHours(0, 0, 0, 0);
-
-        if (seleccionFecha <= fechaActual) {
-            document.getElementById("alerta").textContent = "La fecha debe ser desde el día siguiente al actual.";
-            document.getElementById("alerta").style.display = "block";
-            limpiarError();
-            return false;
-        }
-
-        return true;
+        data.forEach((e, i) => {
+            if (e.id === id2) {
+                e.estadoCita = document.querySelector('#tipo option:checked').getAttribute('data-imagen')
+                e.mascota = document.getElementById('mascota').value;
+                e.propietario = document.getElementById('propietario').value;
+                e.telefono = document.getElementById('telefono').value;
+                e.tipo = document.getElementById('tipo').value;
+                e.fecha = document.getElementById('fecha').value;
+                e.hora = document.getElementById('hora').value;
+                e.sintomas = document.getElementById('message-text').value;
+            }
+            document.getElementById('tarjeta').innerHTML = ""
+            pintar()
+            cerrar()
+        });
     }
 }
 
-function esCitaRepetida(fecha, hora) {
-    for (let i = 0; i < citas.length; i++) {
-        const cita = cita[i];
-        if (cita.fecha.getTime() === fecha.getTime() && cita.hora === hora) {
-            return true;
+function pintar() {
+    data.forEach((e, i) => {
+        let cardDiv = document.createElement('div');
+        cardDiv.id = `tarjeta_${e.id}`;
+        cardDiv.classList.add('card');
+        cardDiv.style.width = '18rem';
+
+        if (e.estadoCita === 'sita terminada') {
+            cardDiv.classList.add('card-sita-terminada');
+        } else if (e.estadoCita === 'sita Cancelada') {
+            cardDiv.classList.add('card-sita-cancelada');
         }
+
+        let cardImg = document.createElement('img');
+        cardImg.classList.add('card-img-top');
+        cardImg.src = e.imagen;
+        cardImg.alt = 'Imagen de ' + e.tipo;
+
+        let cardBodyDiv = document.createElement('div');
+        cardBodyDiv.classList.add('card-body');
+
+        let cardTitle = document.createElement('h5');
+        cardTitle.classList.add('card-title');
+        cardTitle.textContent = e.mascota;
+
+        let cardText = document.createElement('p');
+        cardText.classList.add('card-text');
+        let horafor = convertirhorafor(e.hora);
+        cardText.innerHTML = 'Propietario: <strong>' + e.propietario + '</strong><br>Teléfono: <strong>' + e.telefono + '</strong><br>Tipo: <strong>' + e.tipo + '</strong><br>Fechas: <strong>' + e.fecha + '</strong><br>Hora: <strong>' + horafor + '</strong><br>Síntomas: <strong>' + e.sintomas + '</strong>';
+
+        let deleteButton = document.createElement('button');
+        deleteButton.classList.add('btn');
+        deleteButton.textContent = '❎';
+
+        let editButton = document.createElement('button');
+        editButton.classList.add('btn');
+        editButton.textContent = '🖋';
+
+        let estadoSelect = document.createElement('select');
+        estadoSelect.classList.add('form-select', 'mb-3');
+        estadoSelect.innerHTML = `
+        <option value="Estado de sita">Estado de sita</option>
+          <option value="sita terminada">Sita Terminada</option>
+          <option value="sita Cancelada">Sita Cancelada</option>
+        `;
+
+        estadoSelect.addEventListener('change', function () {
+            e.estadoCita = estadoSelect.value;
+            // Actualiza la clase CSS de la tarjeta según el nuevo estado de la cita
+            if (e.estadoCita === 'sita terminada') {
+                cardDiv.classList.add('card-sita-terminada');
+                cardDiv.classList.remove('card-sita-cancelada');
+            } else if (e.estadoCita === 'sita Cancelada') {
+                cardDiv.classList.add('card-sita-cancelada');
+                cardDiv.classList.remove('card-sita-terminada');
+            } else {
+                // Si el estado de la cita no es ni "sita terminada" ni "sita Cancelada", elimina ambas clases
+                cardDiv.classList.remove('card-sita-terminada', 'card-sita-cancelada');
+            }
+        });
+
+        cardBodyDiv.appendChild(estadoSelect);
+
+        deleteButton.addEventListener('click', function () {
+            cardDiv.remove();
+        });
+
+        editButton.addEventListener('click', function () {
+            editar(e);
+        });
+
+        cardDiv.appendChild(cardImg);
+        cardBodyDiv.appendChild(cardTitle);
+        cardBodyDiv.appendChild(cardText);
+        cardBodyDiv.appendChild(deleteButton);
+        cardBodyDiv.appendChild(editButton);
+        cardDiv.appendChild(cardBodyDiv);
+        document.getElementById('tarjeta').appendChild(cardDiv);
+    })
+
+}
+
+
+document.getElementById("inlineRadio1").addEventListener("click", mostrarTarjetasTerminadas);
+document.getElementById("inlineRadio2").addEventListener("click", mostrarTarjetasAbiertas);
+document.getElementById("inlineRadio3").addEventListener("click", mostrarTarjetasCanceladas);
+
+function mostrarTarjetasTerminadas() {
+    // Recorremos el arreglo 'data' y mostramos u ocultamos las tarjetas según el estado
+    data.forEach((e, i) => {
+        let tarjeta = document.getElementById(`tarjeta_${e.id}`);
+        if (e.estadoCita === 'sita terminada') {
+            tarjeta.style.display = "block"; // Mostramos la tarjeta
+        } else {
+            tarjeta.style.display = "none"; // Ocultamos la tarjeta
+        }
+    });
+}
+
+function mostrarTarjetasAbiertas() {
+    // Recorremos el arreglo 'data' y mostramos u ocultamos las tarjetas según el estado
+    data.forEach((e, i) => {
+        let tarjeta = document.getElementById(`tarjeta_${e.id}`);
+        if (e.estadoCita !== 'sita terminada' && e.estadoCita !== 'sita Cancelada') {
+            tarjeta.style.display = "block"; // Mostramos la tarjeta
+        } else {
+            tarjeta.style.display = "none"; // Ocultamos la tarjeta
+        }
+    });
+}
+
+function mostrarTarjetasCanceladas() {
+    // Recorremos el arreglo 'data' y mostramos u ocultamos las tarjetas según el estado
+    data.forEach((e, i) => {
+        let tarjeta = document.getElementById(`tarjeta_${e.id}`);
+        if (e.estadoCita === 'sita Cancelada') {
+            tarjeta.style.display = "block"; // Mostramos la tarjeta
+        } else {
+            tarjeta.style.display = "none"; // Ocultamos la tarjeta
+        }
+    });
+}
+
+function convertirhorafor(hora24) {
+    let hora12 = "";
+    let partesHora = hora24.split(":");
+    let hora = parseInt(partesHora[0]);
+    let min = partesHora[1];
+
+    if (hora === 0) {
+        hora12 = "12:" + min + " AM";
+    } else if (hora < 12) {
+        hora12 = hora + ":" + min + " AM";
+    } else if (hora === 12) {
+        hora12 = "12:" + min + " PM";
+    } else {
+        hora12 = (hora - 12) + ":" + min + " PM";
     }
-    return false;
+
+    return hora12;
 }
 
-
-function limpiarError() {
-    setTimeout(function () {
-        document.getElementById("alerta").textContent = "";
-        document.getElementById("alerta").style.display = "none";
-    }, 2500);
-}
-
-function limpiarModal() {
-    document.getElementById('nombreMascota').value = '';
-    document.getElementById('nombrePropietario').value = '';
+function limpiar() {
+    document.getElementById('mascota').value = '';
+    document.getElementById('propietario').value = '';
     document.getElementById('telefono').value = '';
-    document.getElementById('tipoMascota').value = 'Mamifero';
+    document.getElementById('tipo').value = 'Seleccione';
     document.getElementById('fecha').value = '';
     document.getElementById('hora').value = '';
     document.getElementById('message-text').value = '';
 
-    let modal = document.getElementById('exampleModal');
-    let modalInstance = bootstrap.Modal.getInstance(modal);
-    modalInstance.hide();
 }
 
+function editar(cita) {
+    bd = "editar"
+    id2 = cita.id
+    console.log(cita)
+    let mascotaInput = document.getElementById('mascota');
+    let propietarioInput = document.getElementById('propietario');
+    let telefonoInput = document.getElementById('telefono');
+    let tipoInput = document.getElementById('tipo');
+    let fechaInput = document.getElementById('fecha');
+    let horaInput = document.getElementById('hora');
+    let sintomasInput = document.getElementById('message-text');
 
-function mostrarCitasByEstado(estado) {
-    document.getElementById('tarjetasContainer').innerHTML = '';
+    mascotaInput.value = cita.mascota;
+    propietarioInput.value = cita.propietario;
+    telefonoInput.value = cita.telefono;
+    tipoInput.value = cita.tipo;
+    fechaInput.value = cita.fecha;
+    horaInput.value = cita.hora;
+    sintomasInput.value = cita.sintomas;
 
-    let citasFiltradas = tarjetas.filter(cita => cita.estado === estado);
+    let modal = document.getElementById('exampleModal');
+    let modalInstance = bootstrap.Modal.getInstance(modal);
+    modalInstance.show();
 
-    citasFiltradas.forEach(cita => {
-        generarTarjeta(
-            cita.nombreMascota,
-            cita.nombrePropietario,
-            cita.telefono,
-            cita.tipoMascota,
-            cita.fecha,
-            cita.hora,
-            cita.sintomas,
-            ESTADOS.indexOf(cita.estado)
-        );
+    actualizarImagenTipoMascota();
+    guardar()
+
+    modal.addEventListener('hidden.bs.modal', function () {
+        limpiar();
     });
+}
+
+function cerrar() {
+    let modal = document.getElementById("exampleModal");
+    let bsModal = bootstrap.Modal.getInstance(modal);
+    bsModal.hide();
 }

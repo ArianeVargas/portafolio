@@ -11,8 +11,8 @@
     padding: .5rem;
 }
 
-.inicioi i{
-    font-size: 3rem;
+.inicioi i {
+    font-size: 2rem;
     color: #000;
 }
 
@@ -66,6 +66,19 @@ img {
     color: #fff;
     font-weight: bold;
     margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.cita-n {
+    border: none;
+    background: rgb(255, 145, 0);
+    border-radius: 8px;
+    padding: .5rem;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .cita:hover {
@@ -80,6 +93,7 @@ img {
 }
 
 label {
+    display: flex;
     font-size: 1.5rem;
     color: rgb(255, 145, 0);
 }
@@ -87,6 +101,14 @@ label {
 input {
     font-size: 1.2rem;
     border-radius: 5px;
+}
+
+.datos {
+    position: relative;
+    bottom: 25px;
+    width: 50%;
+    border-radius: 10px;
+    margin-left: 50%;
 }
 
 .form-control {
@@ -127,30 +149,22 @@ input {
     background-color: #e9ecef;
 }
 
-.modal-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    margin: 1rem;
-}
-
-#tarjetasContainer {
+.tarjeta {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
     gap: 1rem;
-    width: 98%;
-    margin: 1rem;
+    justify-content: flex-start;
 }
 
 .card {
-    flex: 0 1 20em;
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    flex: 1 1 280px;
+    max-width: 360px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 1rem;
+    transition: transform 0.2s ease-in-out;
 }
+
 
 .card-img-top {
     border-top-left-radius: 10px;
@@ -182,13 +196,22 @@ input {
     padding: 0 1rem 1rem 1rem;
 }
 
-#alerta {
-    display: none;
+.mensaje-error {
+    position: relative;
+    bottom: 25px;
     background-color: #f8d7da;
     color: #721c24;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 50%;
+    margin-top: 5px;
+}
+
+.mensaje-exito {
+    font-size: 20px;
+    background-color: #d5e7d272;
+    color: rgb(7, 164, 7);
+    font-weight: bold;
 }
 
 .card-footer {
@@ -226,4 +249,46 @@ i {
 
 .estado-cancelada {
     background-color: #F5B7B1;
+}
+
+.col1 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.p-3 {
+    max-width: 100%;
+    width: 97%px;
+    margin: 0 auto;
+}
+
+.p-3 h4 {
+    background-color: rgb(255, 145, 0);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 800;
+}
+
+.form-check {
+    background-color: rgb(255, 145, 0);
+    padding: .5rem;
+    border-radius: 10px;
+    font-weight: 800;
+}
+
+.form-check-inline {
+    display: inline-flex;
+    align-items: center;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.form-check-label {
+    font-size: 1.5rem;
+    color: #fff;
 }
