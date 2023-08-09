@@ -17,6 +17,14 @@
         ]
       }
     ],
-    "button-type": "off"
+    "button-type": "off",
+    "disown-opener": "off",
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
+      }
+    ],
+    "no-inline-styles": "off"
   }
 }
