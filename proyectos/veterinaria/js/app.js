@@ -103,6 +103,10 @@ function mostrarError(campo, mensaje) {
     }, 5000);
 }
 
+
+
+
+
 let bd = ""
 let id = 0
 let id2
@@ -168,10 +172,10 @@ function pintar() {
         cardDiv.classList.add('card');
         cardDiv.style.width = '18rem';
 
-        if (e.estadoCita === 'sita terminada') {
-            cardDiv.classList.add('card-sita-terminada');
-        } else if (e.estadoCita === 'sita Cancelada') {
-            cardDiv.classList.add('card-sita-cancelada');
+        if (e.estadoCita === 'cita terminada') {
+            cardDiv.classList.add('card-cita-terminada');
+        } else if (e.estadoCita === 'cita Cancelada') {
+            cardDiv.classList.add('card-cita-cancelada');
         }
 
         let cardImg = document.createElement('img');
@@ -191,35 +195,44 @@ function pintar() {
         let horafor = convertirhorafor(e.hora);
         cardText.innerHTML = 'Propietario: <strong>' + e.propietario + '</strong><br>Teléfono: <strong>' + e.telefono + '</strong><br>Tipo: <strong>' + e.tipo + '</strong><br>Fechas: <strong>' + e.fecha + '</strong><br>Hora: <strong>' + horafor + '</strong><br>Síntomas: <strong>' + e.sintomas + '</strong>';
 
+        // Agregar elemento para mostrar el estado
+        let estadoP = document.createElement('p');
+        estadoP.classList.add('estado-text');
+        estadoP.textContent = 'Estado: ' + e.estadoCita;
+        cardText.appendChild(estadoP);
+
         let deleteButton = document.createElement('button');
-        deleteButton.classList.add('btn');
+        deleteButton.classList.add('btn', 'btn-danger');
         deleteButton.textContent = '❎';
 
         let editButton = document.createElement('button');
-        editButton.classList.add('btn');
-        editButton.textContent = '🖋';
+        editButton.classList.add('btn', 'btn-primary');
+        editButton.textContent = '✏';
 
         let estadoSelect = document.createElement('select');
         estadoSelect.classList.add('form-select', 'mb-3');
         estadoSelect.innerHTML = `
-        <option value="Estado de sita">Estado de sita</option>
-          <option value="sita terminada">Sita Terminada</option>
-          <option value="sita Cancelada">Sita Cancelada</option>
+        <option value="Estado de cita">Estado de cita</option>
+          <option value="cita terminada">cita Terminada</option>
+          <option value="cita Cancelada">cita Cancelada</option>
         `;
 
         estadoSelect.addEventListener('change', function () {
             e.estadoCita = estadoSelect.value;
             // Actualiza la clase CSS de la tarjeta según el nuevo estado de la cita
-            if (e.estadoCita === 'sita terminada') {
-                cardDiv.classList.add('card-sita-terminada');
-                cardDiv.classList.remove('card-sita-cancelada');
-            } else if (e.estadoCita === 'sita Cancelada') {
-                cardDiv.classList.add('card-sita-cancelada');
-                cardDiv.classList.remove('card-sita-terminada');
+            if (e.estadoCita === 'cita terminada') {
+                cardDiv.classList.add('card-cita-terminada');
+                cardDiv.classList.remove('card-cita-cancelada');
+            } else if (e.estadoCita === 'cita Cancelada') {
+                cardDiv.classList.add('card-cita-cancelada');
+                cardDiv.classList.remove('card-cita-terminada');
             } else {
-                // Si el estado de la cita no es ni "sita terminada" ni "sita Cancelada", elimina ambas clases
-                cardDiv.classList.remove('card-sita-terminada', 'card-sita-cancelada');
+                // Si el estado de la cita no es ni "cita terminada" ni "cita Cancelada", elimina ambas clases
+                cardDiv.classList.remove('card-cita-terminada', 'card-cita-cancelada');
             }
+
+            // Actualizar el texto del estado en la tarjeta
+            estadoP.textContent = 'Estado: ' + e.estadoCita;
         });
 
         cardBodyDiv.appendChild(estadoSelect);
@@ -244,6 +257,7 @@ function pintar() {
 }
 
 
+
 document.getElementById("inlineRadio1").addEventListener("click", mostrarTarjetasTerminadas);
 document.getElementById("inlineRadio2").addEventListener("click", mostrarTarjetasAbiertas);
 document.getElementById("inlineRadio3").addEventListener("click", mostrarTarjetasCanceladas);
@@ -252,7 +266,7 @@ function mostrarTarjetasTerminadas() {
     // Recorremos el arreglo 'data' y mostramos u ocultamos las tarjetas según el estado
     data.forEach((e, i) => {
         let tarjeta = document.getElementById(`tarjeta_${e.id}`);
-        if (e.estadoCita === 'sita terminada') {
+        if (e.estadoCita === 'cita terminada') {
             tarjeta.style.display = "block"; // Mostramos la tarjeta
         } else {
             tarjeta.style.display = "none"; // Ocultamos la tarjeta
@@ -264,7 +278,7 @@ function mostrarTarjetasAbiertas() {
     // Recorremos el arreglo 'data' y mostramos u ocultamos las tarjetas según el estado
     data.forEach((e, i) => {
         let tarjeta = document.getElementById(`tarjeta_${e.id}`);
-        if (e.estadoCita !== 'sita terminada' && e.estadoCita !== 'sita Cancelada') {
+        if (e.estadoCita !== 'cita terminada' && e.estadoCita !== 'cita Cancelada') {
             tarjeta.style.display = "block"; // Mostramos la tarjeta
         } else {
             tarjeta.style.display = "none"; // Ocultamos la tarjeta
@@ -276,7 +290,7 @@ function mostrarTarjetasCanceladas() {
     // Recorremos el arreglo 'data' y mostramos u ocultamos las tarjetas según el estado
     data.forEach((e, i) => {
         let tarjeta = document.getElementById(`tarjeta_${e.id}`);
-        if (e.estadoCita === 'sita Cancelada') {
+        if (e.estadoCita === 'cita Cancelada') {
             tarjeta.style.display = "block"; // Mostramos la tarjeta
         } else {
             tarjeta.style.display = "none"; // Ocultamos la tarjeta
@@ -333,6 +347,7 @@ function editar(cita) {
     fechaInput.value = cita.fecha;
     horaInput.value = cita.hora;
     sintomasInput.value = cita.sintomas;
+
 
     let modal = document.getElementById('exampleModal');
     let modalInstance = bootstrap.Modal.getInstance(modal);

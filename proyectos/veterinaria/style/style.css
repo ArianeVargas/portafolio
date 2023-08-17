@@ -150,6 +150,7 @@ input {
 }
 
 .tarjeta {
+    margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -239,17 +240,14 @@ i {
     background: #555;
 }
 
-.estado-creada {
-    background-color: #AED6F1;
-    
+.card-cita-terminada {
+    background-color: rgb(182, 224, 134);
+    border: 3px solid rgb(255, 254, 254);
 }
 
-.estado-finalizada {
-    background-color: #82E0AA;
-}
-
-.estado-cancelada {
-    background-color: #F5B7B1;
+.card-cita-cancelada {
+    background-color: rgba(229, 110, 110, 0.501);
+    border: 3px solid rgb(255, 255, 255);
 }
 
 .col1 {
@@ -272,7 +270,7 @@ i {
 }
 
 .form-check {
-    background-color: rgb(255, 145, 0);
+    
     padding: .5rem;
     border-radius: 10px;
     font-weight: 800;
@@ -291,5 +289,4 @@ i {
 
 .form-check-label {
     font-size: 1.5rem;
-    color: #fff;
 }
